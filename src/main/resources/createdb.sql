@@ -1,13 +1,13 @@
-CREATE SHEMA IF NOT EXIST 'test' DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS test;
 
 USE test;
 
-CREATE TABLE IF NOT EXIST `notes` (
+CREATE TABLE IF NOT EXISTS `notes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
-  `createDate` date NOT NULL,
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (id),
+  UNIQUE KEY id_UNIQUE (id)
+)
