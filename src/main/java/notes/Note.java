@@ -3,7 +3,6 @@ package notes;
 import java.util.Date;
 
 public class Note {
-
     private int id;
     private String name;
     private String description;
@@ -34,7 +33,6 @@ public class Note {
         return description;
     }
 
-
     public Date getCreateDate() {
         return createDate;
     }
@@ -50,7 +48,6 @@ public class Note {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
