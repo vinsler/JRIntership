@@ -1,14 +1,12 @@
-#CREATE SCHEMA IF NOT EXISTS test DEFAULT CHARACTER SET utf8 ;
-CREATE DATABASE IF NOT EXISTS test;
+CREATE DATABASE IF NOT EXISTS test DEFAULT CHARACTER SET utf8;
 
 USE test;
 
-CREATE TABLE IF NOT EXISTS `notes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) DEFAULT NULL,
-  `description` varchar(100) DEFAULT NULL,
-  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (id),
-  UNIQUE KEY id_UNIQUE (id)
+CREATE TABLE IF NOT EXISTS notes (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(20) not null,
+  description varchar(100),
+  create_date datetime NOT NULL,
+  status tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
 )
