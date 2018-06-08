@@ -9,13 +9,14 @@ public class Connector {
     private static final String URL = "jdbc:mysql://localhost:3306/test";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "root";
+    private static final Connector connector = new Connector();
 
     private Connector() {}
 
     public static Connector getInstance() {
         try {
             DriverManager.registerDriver(new FabricMySQLDriver());
-            return new Connector();
+            return connector;
         } catch (SQLException e) {
             System.err.println("Error connect driver!");
             throw new RuntimeException();
