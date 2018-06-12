@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS test DEFAULT CHARACTER SET utf8;
+CREATE DATABASE IF NOT EXISTS test DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 USE test;
 
@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS notes (
   create_date datetime NOT NULL,
   status tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
-)
+) default character set utf8;
