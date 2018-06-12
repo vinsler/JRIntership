@@ -31,13 +31,11 @@ public class Store {
         return INSTANCE;
     }
 
-
     public void add(Note note) throws SQLException {
         try (Connection connection = CONNECTOR.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(getQuery("add"))) {
 
             java.sql.Date sqlDate = new java.sql.Date(new java.util.Date().getTime());
-
             preparedStatement.setInt(1, note.getId());
             preparedStatement.setString(2, note.getName());
             preparedStatement.setString(3, note.getDescription());
