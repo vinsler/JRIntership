@@ -1,4 +1,4 @@
-package notes;
+package notes.dao.util;
 
 import com.mysql.fabric.jdbc.FabricMySQLDriver;
 
@@ -15,14 +15,17 @@ public class Connector {
 
     private Connector() {}
 
-    public static Connector getInstance() {
+    static  {
         try {
             DriverManager.registerDriver(new FabricMySQLDriver());
             PROPERTIES.load(new FileInputStream(PROPERTIES_URL));
-            return CONNECTOR;
         } catch (Exception e) {
             throw new ExceptionInInitializerError("Error connect driver!");
         }
+    }
+
+    public static Connector getInstance(){
+        return CONNECTOR;
     }
 
     public Connection getConnection() {
@@ -30,7 +33,8 @@ public class Connector {
             return DriverManager.getConnection(
                     PROPERTIES.getProperty("url"),
                     PROPERTIES.getProperty("login"),
-                    PROPERTIES.getProperty("password"));
+                    PROPERTIES.getProperty("password")
+            );
         } catch (SQLException e) {
             throw new IllegalArgumentException("Error connect to datebase!");
         }
