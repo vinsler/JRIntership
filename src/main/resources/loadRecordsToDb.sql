@@ -1,4 +1,4 @@
-insert notes (name, description, create_date, status)
+insert into notes (name, description, create_date, status)
 values ('Английский','Почитать про обучение английской грамматике.','2018-04-03', 0);
 
 insert into notes (name, description, create_date, status)
