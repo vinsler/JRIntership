@@ -31,7 +31,7 @@ public class UsersStore {
 
     private UsersStore(){}
 
-    public UsersStore getInstance(){
+    public static UsersStore getInstance(){
         return INSTANCE;
     }
 
@@ -51,7 +51,7 @@ public class UsersStore {
             preparedStatement.setString(1, users.getName());
             preparedStatement.setString(2, users.getLogin());
             preparedStatement.setString(3, users.getPassword());
-            preparedStatement.setInt(4, users.getId());
+            preparedStatement.setInt(4, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new SqlAccessException(SQL_ERR_MSG, e);
@@ -68,9 +68,9 @@ public class UsersStore {
         }
     }
 
-    public Users find (int id) throws SQLException {
+    public Users findone(int id) throws SQLException {
         try (Connection connection = CONNECTOR.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findByOne"))) {
+        PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findById"))) {
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (!resultSet.next()) {
@@ -86,7 +86,7 @@ public class UsersStore {
     public ArrayList<Users> findall () throws SQLException {
         ArrayList<Users> listUsers = new ArrayList<>();
         try (Connection connection = CONNECTOR.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findall"))) {
+        PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findAll"))) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 listUsers.add(constructUser(resultSet));

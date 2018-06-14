@@ -41,6 +41,7 @@ public class NoteStore {
             preparedStatement.setString(3, note.getDescription());
             preparedStatement.setDate(4, sqlDate);
             preparedStatement.setInt(5, note.getStatus());
+            preparedStatement.setInt(6, note.getUsers_id());
             preparedStatement.executeUpdate();
         }
     }
