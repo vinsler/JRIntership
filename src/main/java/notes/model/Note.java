@@ -41,7 +41,6 @@ public class Note {
     public void setStatus(int status) {
         this.status = status;
     }
-
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
