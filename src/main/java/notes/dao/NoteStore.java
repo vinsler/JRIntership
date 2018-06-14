@@ -10,24 +10,24 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class Store {
-    private static final Store INSTANCE = new Store();
-    private static final String PROPERTIES_URL = "src/main/resources/query.properties";
+public class NoteStore {
+    private static final NoteStore INSTANCE = new NoteStore();
+    private static final String PROPERTIES_URL = "src/main/resources/NoteQuery.properties";
     private static final Connector CONNECTOR = Connector.getInstance();
     private static final Properties PROPERTIES = new Properties();
-    private static final String SQL_ERR_MSG = "Error executing query!";
+    private static final String SQL_ERR_MSG = "Error executing Note query!";
 
     static {
         try {
             PROPERTIES.load(new FileInputStream(PROPERTIES_URL));
         } catch (IOException e) {
-            throw new IllegalArgumentException("Error, can't find file PROPERTIES_URL!", e);
+            throw new IllegalArgumentException("ERROR! Can't find file " + PROPERTIES_URL, e);
         }
     }
 
-    private Store(){ }
+    private NoteStore(){ }
 
-    public static Store getInstance(){
+    public static NoteStore getInstance(){
         return INSTANCE;
     }
 
@@ -84,7 +84,7 @@ public class Store {
                 }
             }
         } catch (SQLException e) {
-            throw  new SqlAccessException(SQL_ERR_MSG, e);
+            throw new SqlAccessException(SQL_ERR_MSG, e);
         }
     }
 
