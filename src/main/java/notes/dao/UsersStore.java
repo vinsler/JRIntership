@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class UsersStore {
+public class UsersStore implements Store<Users, Integer> {
     private static final UsersStore INSTANCE = new UsersStore();
     private static final Connector CONNECTOR = Connector.getInstance();
     private static final String PROPERTIES_URL = "src/main/resources/UsersQuery.properties";
@@ -35,17 +35,19 @@ public class UsersStore {
         return INSTANCE;
     }
 
-    public void add(Users users) throws SQLException {
+    public void add(Users users) {
         try (Connection connection = CONNECTOR.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(getQuery("add"))) {
             preparedStatement.setString(1, users.getName());
             preparedStatement.setString(2, users.getLogin());
             preparedStatement.setString(3, users.getPassword());
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new SqlAccessException(SQL_ERR_MSG, e);
         }
     }
 
-    public void update(Users users, int id) throws SQLException {
+    public void update(Users users, Integer id) {
         try (Connection connection = CONNECTOR.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getQuery("update"))) {
             preparedStatement.setString(1, users.getName());
@@ -58,7 +60,7 @@ public class UsersStore {
         }
     }
 
-    public void delete(int id) throws SQLException {
+    public void delete(Integer id) {
         try (Connection connection = CONNECTOR.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getQuery("delete"))) {
             preparedStatement.setInt(1, id);
@@ -68,7 +70,7 @@ public class UsersStore {
         }
     }
 
-    public Users findone(int id) throws SQLException {
+    public Users findOne(Integer id) {
         try (Connection connection = CONNECTOR.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findById"))) {
             preparedStatement.setInt(1, id);
@@ -77,13 +79,13 @@ public class UsersStore {
                     return null;
                 }
                 return constructUser(resultSet);
-            } catch (SQLException e) {
-                throw new SqlAccessException(SQL_ERR_MSG, e);
             }
+        } catch (SQLException e) {
+            throw new SqlAccessException(SQL_ERR_MSG, e);
         }
     }
 
-    public ArrayList<Users> findall () throws SQLException {
+    public ArrayList<Users> findAll (){
         ArrayList<Users> listUsers = new ArrayList<>();
         try (Connection connection = CONNECTOR.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findAll"))) {

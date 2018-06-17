@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class NoteStore {
+public class NoteStore implements Store<Note, Integer>{
     private static final NoteStore INSTANCE = new NoteStore();
     private static final String PROPERTIES_URL = "src/main/resources/NoteQuery.properties";
     private static final Connector CONNECTOR = Connector.getInstance();
@@ -31,7 +31,7 @@ public class NoteStore {
         return INSTANCE;
     }
 
-    public void add(Note note) throws SQLException {
+    public void add(Note note) {
         try (Connection connection = CONNECTOR.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(getQuery("add"))) {
 
@@ -43,10 +43,12 @@ public class NoteStore {
             preparedStatement.setInt(5, note.getStatus());
             preparedStatement.setInt(6, note.getUsers_id());
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new SqlAccessException(SQL_ERR_MSG, e);
         }
     }
 
-    public void update(Note note, int id) throws SQLException {
+    public void update(Note note, Integer id) {
         try (
         Connection connection = CONNECTOR.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getQuery("update"))) {
@@ -60,7 +62,7 @@ public class NoteStore {
         }
     }
 
-    public void delete(int id) throws SQLException {
+    public void delete(Integer id) {
         try (
         Connection connection = CONNECTOR.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getQuery("delete"));
@@ -72,7 +74,7 @@ public class NoteStore {
         }
     }
 
-    public Note findOne(int id) throws SQLException {
+    public Note findOne(Integer id){
         try (Connection connection = CONNECTOR.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findById"))){
             preparedStatement.setInt(1, id);
@@ -89,7 +91,7 @@ public class NoteStore {
         }
     }
 
-    public ArrayList<Note> findAll() throws SQLException {
+    public ArrayList<Note> findAll(){
         ArrayList<Note> arrListNote = new ArrayList<>();
         try (Connection connection = CONNECTOR.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findAll"))){
