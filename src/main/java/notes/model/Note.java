@@ -8,7 +8,7 @@ public class Note {
     private String description;
     private Date createDate;
     private int status;
-    private int users_id;
+    private Users user;
 
     public void setNote(int id) {
         this.id = id;
@@ -20,6 +20,11 @@ public class Note {
     public String getName() {
         return name;
     }
+
+    public Users getUser() {
+        return user;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -29,9 +34,7 @@ public class Note {
     public int getStatus() {
         return status;
     }
-    public int getUsers_id() {
-        return users_id;
-    }
+
 
     public void setId(int id) {
         this.id = id;
@@ -48,7 +51,7 @@ public class Note {
     public void setStatus(int status) {
         this.status = status;
     }
-    public void setUsers_id(int users_id) {
-        this.users_id = users_id;
+    public void setUser(Users user) {
+        this.user = user;
     }
 }

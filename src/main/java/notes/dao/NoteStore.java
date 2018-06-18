@@ -41,7 +41,7 @@ public class NoteStore implements Store<Note, Integer>{
             preparedStatement.setString(3, note.getDescription());
             preparedStatement.setDate(4, sqlDate);
             preparedStatement.setInt(5, note.getStatus());
-            preparedStatement.setInt(6, note.getUsers_id());
+            preparedStatement.setInt(6, note.getUser().getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new SqlAccessException(SQL_ERR_MSG, e);
