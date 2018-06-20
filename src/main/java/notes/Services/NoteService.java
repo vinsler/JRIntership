@@ -1,75 +1,86 @@
 package notes.Services;
 
 import notes.dao.NoteStore;
-import notes.exception.ServiceResourceException;
-import notes.exception.ServiceValidationException;
+import notes.dao.Store;
+import notes.exception.ResourceException;
+import notes.exception.ValidationException;
 import notes.exception.SqlAccessException;
 import notes.model.Note;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // todo check exist table BEFORE use NOTESTORE !!!
 
 public class NoteService {
-    private static final NoteStore NOTESTORE = NoteStore.getInstance();
-    private static final String ERR_USER = "Service, check user id!";
-    private static final String ERR_NAME = "Service, check note name!";
-    private static final String ERR_UPDATE = "Service, check input for update!";
-    private static final String ERR_DELETE = "Service, check id for delete!";
-    private static final String ERR_NOT_FOUND = "Service, resources not found!";
-
+    private static final Store NOTESTORE = NoteStore.getInstance();
 
     public void add(Note note) {
-        if (note.getName() == null) {
-            throw new ServiceValidationException(ERR_NAME);
-        } else if (note.getUser().getId() < 1) {
-            throw  new ServiceValidationException(ERR_USER);
-        } else {
-            try {
-                NOTESTORE.add(note);
-            } catch (RuntimeException e) {
-                throw new SqlAccessException(e.toString());
-            }
+        checkNote(note, 1);
+        try {
+            NOTESTORE.add(note);
+        } catch (SqlAccessException e) {
+                // вот сюда выбрасывается SqlAccessException(SQL_ERR_MSG, e);
+            e.printStackTrace();
         }
     }
 
     public void update(Note note, Integer i) {
-        if (note.getName() == null && note.getUser().getId() == 0) {
-            throw new ServiceResourceException(ERR_UPDATE);
-        } else if (i < 1) {
-            throw new ServiceResourceException(ERR_USER);
-        } else {
-            try {
-                NOTESTORE.update(note, i);
-            } catch (RuntimeException e) {
-                throw new SqlAccessException(e.toString());
-            }
+        checkNote(note, i);
+        try {
+            NOTESTORE.update(note, i);
+        } catch (SqlAccessException e) {
+            e.printStackTrace();
         }
     }
 
     public void delete(Integer i) {
-        try {
-            NOTESTORE.delete(i);
-        } catch (RuntimeException e) {
-            throw new SqlAccessException(ERR_DELETE, e);
+        if (NOTESTORE.findOne(i) != null) {
+            try {
+                NOTESTORE.delete(i);
+            } catch (SqlAccessException e) {
+                e.printStackTrace();
+            }
+        } else {
+            throw new ResourceException();
         }
     }
 
     public Note findOne(Integer i) {
-        Note note = NOTESTORE.findOne(i);
-        if (note != null) {
-            return note;
+        try {
+            Note note = (Note) NOTESTORE.findOne(i);
+            if (note != null) {
+                return note;
+            }
+            return null;
+        } catch (SqlAccessException e) {
+            e.printStackTrace();
+            throw new ResourceException();
         }
-        throw new ServiceResourceException(ERR_NOT_FOUND);
     }
 
-    public ArrayList<Note> findAll() {
-        ArrayList<Note> listNote = new ArrayList<>();
-        listNote = NOTESTORE.findAll();
-        if (!listNote.isEmpty()) {
+    public List<Note> findAll() {
+        List<Note> listNote = new ArrayList<>();
+        try {
+            listNote = NOTESTORE.findAll();
+            if (!listNote.isEmpty()) {
+                return listNote;
+            }
             return listNote;
+        } catch (SqlAccessException e) {
+            e.printStackTrace();
+            throw new ResourceException();
         }
-        throw new ServiceResourceException(ERR_NOT_FOUND);
+    }
+
+    private void checkNote(Note note, Integer i) {
+        if (note.getName() == null) {
+            throw new ValidationException("ERR_NAME");
+        } else if (note.getUser() == null) {
+            throw new ValidationException("ERR_USER_NOT_FOUND");
+        } else if (note.getUser().getId() < 1 || i < 1) {
+            throw new ValidationException("ERR_USER_ID");
+        }
     }
 }
 

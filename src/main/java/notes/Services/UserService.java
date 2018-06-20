@@ -1,77 +1,88 @@
 package notes.Services;
 
 import notes.dao.UsersStore;
-import notes.exception.ServiceResourceException;
-import notes.exception.ServiceValidationException;
+import notes.exception.ResourceException;
+import notes.exception.ValidationException;
 import notes.exception.SqlAccessException;
 import notes.model.Users;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // todo check exist table BEFORE use userstore !!!
 
 public class UserService {
     private static final UsersStore USERSTORE = UsersStore.getInstance();
-    private static final String ERR_ID = "Service, check id!";
-    private static final String ERR_NAME = "Service, check name!";
-    private static final String ERR_LOGIN = "Service, check login!";
-    private static final String ERR_PASSWORD = "Service, check password!";
-    private static final String ERR_UPDATE_DELETE = "Service, check that the data for the actions is correct!";
-    private static final String ERR_NOT_FOUND = "Service, resources not found!";
+//    private static final String ERR_ID = "Service, check id!";
+//    private static final String ERR_NAME = "Service, check name!";
+//    private static final String ERR_LOGIN = "Service, check login!";
+//    private static final String ERR_PASSWORD = "Service, check password!";
+//    private static final String ERR_UPDATE_DELETE = "Service, check that the data for the actions is correct!";
+//    private static final String ERR_NOT_FOUND = "Service, resources not found!";
 
     public void add(Users users){
         if (users.getId() == 0) {
-            throw new ServiceValidationException(ERR_ID);
+            throw new ValidationException("ERR_ID");
         } else if (users.getName() == null) {
-            throw new ServiceValidationException(ERR_NAME);
+            throw new ValidationException("ERR_NAME");
         }  else if (users.getLogin() == null) {
-            throw new ServiceValidationException(ERR_LOGIN);
+            throw new ValidationException("ERR_LOGIN");
         } else if (users.getPassword() == null) {
-            throw new ServiceValidationException(ERR_PASSWORD);
+            throw new ValidationException("ERR_PASSWORD");
         }
         try {
             USERSTORE.add(users);
-        } catch (RuntimeException e) {
-            throw new SqlAccessException(e.toString());
+        } catch (SqlAccessException e) {
+            e.printStackTrace();
         }
     }
 
     public void update (Users users, Integer i){
         if (i == 0) {
-            throw new ServiceValidationException(ERR_UPDATE_DELETE);
+            throw new ValidationException("ERR_UPDATE");
         }
         try {
             USERSTORE.update(users, i);
-        } catch (RuntimeException e) {
-            throw new SqlAccessException(e.toString());
+        } catch (SqlAccessException e) {
+            e.printStackTrace();
         }
     }
 
     public void delete(Integer i){
         if (i == 0) {
-            throw new ServiceValidationException(ERR_UPDATE_DELETE);
+            throw new ValidationException("ERR_DELETE");
         }
         try {
             USERSTORE.delete(i);
-        } catch (RuntimeException e) {
-            throw new SqlAccessException(e.toString());
+        } catch (SqlAccessException e) {
+            e.printStackTrace();
         }
     }
 
     public Users findOne(Integer i){
-        Users users = USERSTORE.findOne(i);
-        if (users != null) {
-            return users;
+        try {
+            Users users = USERSTORE.findOne(i);
+            if (users != null) {
+                return users;
+            }
+            return null;
+        } catch (SqlAccessException e) {
+            e.printStackTrace();
+            throw new ResourceException("ERR_NOT_FOUND");
         }
-        throw new ServiceResourceException(ERR_NOT_FOUND);
     }
 
-    public ArrayList<Users> findAll(){
-        ArrayList<Users> listUsers = new ArrayList<>();
-        listUsers = USERSTORE.findAll();
-        if (!listUsers.isEmpty()) {
+    public List<Users> findAll(){
+        List<Users> listUsers = new ArrayList<>();
+        try {
+            listUsers = USERSTORE.findAll();
+            if (!listUsers.isEmpty()) {
+                return listUsers;
+            }
             return listUsers;
+        } catch (SqlAccessException e) {
+            e.printStackTrace();
+            throw new ResourceException("ERR_NOT_FOUND");
         }
-        throw new ServiceResourceException(ERR_NOT_FOUND);
     }
 }
