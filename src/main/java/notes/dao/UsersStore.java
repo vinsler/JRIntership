@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class UsersStore implements Store<Users, Integer> {
@@ -85,8 +86,8 @@ public class UsersStore implements Store<Users, Integer> {
         }
     }
 
-    public ArrayList<Users> findAll (){
-        ArrayList<Users> listUsers = new ArrayList<>();
+    public List<Users> findAll (){
+        List<Users> listUsers = new ArrayList<>();
         try (Connection connection = CONNECTOR.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findAll"))) {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -114,5 +115,4 @@ public class UsersStore implements Store<Users, Integer> {
         }
         return PROPERTIES.getProperty(query);
     }
-
 }

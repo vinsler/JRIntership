@@ -21,9 +21,6 @@ public class Note {
         return name;
     }
 
-    public Users getUser() {
-        return user;
-    }
 
     public String getDescription() {
         return description;
@@ -34,7 +31,9 @@ public class Note {
     public int getStatus() {
         return status;
     }
-
+    public Users getUser() {
+        return user;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -51,6 +50,7 @@ public class Note {
     public void setStatus(int status) {
         this.status = status;
     }
+
     public void setUser(Users user) {
         this.user = user;
     }

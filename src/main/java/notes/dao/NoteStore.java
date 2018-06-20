@@ -3,15 +3,17 @@ package notes.dao;
 import notes.dao.util.Connector;
 import notes.exception.SqlAccessException;
 import notes.model.Note;
+import notes.model.Users;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class NoteStore implements Store<Note, Integer>{
-    private static final NoteStore INSTANCE = new NoteStore();
+    private static final Store INSTANCE = new NoteStore();
     private static final String PROPERTIES_URL = "src/main/resources/NoteQuery.properties";
     private static final Connector CONNECTOR = Connector.getInstance();
     private static final Properties PROPERTIES = new Properties();
@@ -27,7 +29,7 @@ public class NoteStore implements Store<Note, Integer>{
 
     private NoteStore(){ }
 
-    public static NoteStore getInstance(){
+    public static Store getInstance(){
         return INSTANCE;
     }
 
@@ -91,15 +93,15 @@ public class NoteStore implements Store<Note, Integer>{
         }
     }
 
-    public ArrayList<Note> findAll(){
-        ArrayList<Note> arrListNote = new ArrayList<>();
+    public List<Note> findAll(){
+        List<Note> listNote = new ArrayList<>();
         try (Connection connection = CONNECTOR.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findAll"))){
             ResultSet result = preparedStatement.executeQuery();
             while (result.next()) {
-                arrListNote.add(constructNote(result));
+                listNote.add(constructNote(result));
             }
-            return arrListNote;
+            return listNote;
         } catch (SQLException e) {
             throw new SqlAccessException(SQL_ERR_MSG, e);
         }
