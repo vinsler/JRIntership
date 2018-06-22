@@ -2,7 +2,7 @@ create database if not exists test;
 
 use test;
 
-create table if not exists users (
+create table if not exists user (
 
   id            int(11) auto_increment,
   name          varchar(20) not null,
