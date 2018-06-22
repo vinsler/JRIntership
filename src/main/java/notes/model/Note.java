@@ -8,7 +8,7 @@ public class Note {
     private String description;
     private Date createDate;
     private int status;
-    private Users user;
+    private User user;
 
     public void setNote(int id) {
         this.id = id;
@@ -31,7 +31,7 @@ public class Note {
     public int getStatus() {
         return status;
     }
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -51,7 +51,7 @@ public class Note {
         this.status = status;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }
