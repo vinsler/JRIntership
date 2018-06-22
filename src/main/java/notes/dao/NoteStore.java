@@ -3,7 +3,6 @@ package notes.dao;
 import notes.dao.util.Connector;
 import notes.exception.SqlAccessException;
 import notes.model.Note;
-import notes.model.Users;
 
 import java.io.FileInputStream;
 import java.io.IOException;

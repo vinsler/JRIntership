@@ -7,5 +7,5 @@ public interface Store<T, ID> {
     void update(T t, ID i);
     void delete(ID i);
     T findOne(ID i);
-    List<?> findAll();
+    List<T> findAll();
 }

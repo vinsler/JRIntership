@@ -1,9 +1,8 @@
 package notes.dao;
 
-
 import notes.dao.util.Connector;
 import notes.exception.SqlAccessException;
-import notes.model.Users;
+import notes.model.User;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,12 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class UsersStore implements Store<Users, Integer> {
+public class UsersStore implements Store<User, Integer> {
     private static final UsersStore INSTANCE = new UsersStore();
     private static final Connector CONNECTOR = Connector.getInstance();
     private static final String PROPERTIES_URL = "src/main/resources/UsersQuery.properties";
     private static final Properties PROPERTIES = new Properties();
-    private static final String SQL_ERR_MSG = "Error executing Users query!";
+    private static final String SQL_ERR_MSG = "Error executing User query!";
 
     static {
         try {
@@ -36,24 +35,24 @@ public class UsersStore implements Store<Users, Integer> {
         return INSTANCE;
     }
 
-    public void add(Users users) {
+    public void add(User user) {
         try (Connection connection = CONNECTOR.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(getQuery("add"))) {
-            preparedStatement.setString(1, users.getName());
-            preparedStatement.setString(2, users.getLogin());
-            preparedStatement.setString(3, users.getPassword());
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setString(3, user.getPassword());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new SqlAccessException(SQL_ERR_MSG, e);
         }
     }
 
-    public void update(Users users, Integer id) {
+    public void update(User user, Integer id) {
         try (Connection connection = CONNECTOR.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getQuery("update"))) {
-            preparedStatement.setString(1, users.getName());
-            preparedStatement.setString(2, users.getLogin());
-            preparedStatement.setString(3, users.getPassword());
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setString(3, user.getPassword());
             preparedStatement.setInt(4, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -71,7 +70,7 @@ public class UsersStore implements Store<Users, Integer> {
         }
     }
 
-    public Users findOne(Integer id) {
+    public User findOne(Integer id) {
         try (Connection connection = CONNECTOR.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findById"))) {
             preparedStatement.setInt(1, id);
@@ -86,8 +85,8 @@ public class UsersStore implements Store<Users, Integer> {
         }
     }
 
-    public List<Users> findAll (){
-        List<Users> listUsers = new ArrayList<>();
+    public List<User> findAll (){
+        List<User> listUsers = new ArrayList<>();
         try (Connection connection = CONNECTOR.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findAll"))) {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -100,13 +99,13 @@ public class UsersStore implements Store<Users, Integer> {
         }
     }
 
-    private Users constructUser(ResultSet resultSet) throws SQLException {
-        Users users = new Users();
-        users.setId(resultSet.getInt(1));
-        users.setName(resultSet.getString(2));
-        users.setLogin(resultSet.getString(3));
-        users.setPassword(resultSet.getString(4));
-        return users;
+    private User constructUser(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        user.setId(resultSet.getInt(1));
+        user.setName(resultSet.getString(2));
+        user.setLogin(resultSet.getString(3));
+        user.setPassword(resultSet.getString(4));
+        return user;
     }
 
     private String getQuery(String query){
