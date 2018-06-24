@@ -8,7 +8,7 @@ import notes.model.Note;
 import java.util.List;
 
 public class NoteService {
-    private static final Store NOTESTORE = NoteStore.getInstance();
+    private Store NOTESTORE = NoteStore.getInstance();
 
     public void add(Note note) {
         checkNote(note, 1);
@@ -43,7 +43,9 @@ public class NoteService {
     }
 
     private void checkNote(Note note, Integer i) {
-        if (i == null || i <= 0) {
+        if (note == null) {
+            throw new ValidationException("ERR_NOTE_NOT_FOUND");
+        }else if (i == null || i <= 0) {
             throw new ValidationException("ERR_ID");
         } else if (note.getName() == null) {
             throw new ValidationException("ERR_NAME");

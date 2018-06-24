@@ -16,6 +16,7 @@ public class ValidationException extends RuntimeException {
         errorMap.put("ERR_DELETE", "Service error, check id for delete!");
         errorMap.put("ERR_NOT_FOUND", "Service error, resources not found!");
         errorMap.put("ERR_USER_NOT_FOUND", "Service error, User object not found!");
+        errorMap.put("ERR_NOTE_NOT_FOUND", "Service error, Note object not found!");
     }
 
     public ValidationException(String key) {

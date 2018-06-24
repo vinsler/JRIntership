@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class UsersStore implements Store<User, Integer> {
-    private static final UsersStore INSTANCE = new UsersStore();
+public class UserStore implements Store<User, Integer> {
+    private static final UserStore INSTANCE = new UserStore();
     private static final Connector CONNECTOR = Connector.getInstance();
     private static final String PROPERTIES_URL = "src/main/resources/UsersQuery.properties";
     private static final Properties PROPERTIES = new Properties();
@@ -29,9 +29,9 @@ public class UsersStore implements Store<User, Integer> {
         }
     }
 
-    private UsersStore(){}
+    private UserStore(){}
 
-    public static UsersStore getInstance(){
+    public static UserStore getInstance(){
         return INSTANCE;
     }
 

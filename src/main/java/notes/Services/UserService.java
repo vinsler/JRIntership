@@ -1,7 +1,7 @@
 package notes.Services;
 
 import notes.dao.Store;
-import notes.dao.UsersStore;
+import notes.dao.UserStore;
 import notes.exception.ValidationException;
 import notes.model.User;
 
@@ -9,7 +9,7 @@ import notes.model.User;
 import java.util.List;
 
 public class UserService {
-    private static final Store USERSTORE = UsersStore.getInstance();
+    private static final Store USERSTORE = UserStore.getInstance();
 
     public void add(User user){
         if (user.getName() == null) {
