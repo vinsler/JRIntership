@@ -45,6 +45,12 @@ public class NoteServiceTest {
     }
 
     @Test(expected = ValidationException.class)
+    public void TestAddWithNoteNameIsEmpty(){
+        note.setName("");
+        noteService.add(note);
+    }
+
+    @Test(expected = ValidationException.class)
     public void TestAddWithUserNull(){
         note.setName("some");
         noteService.add(note);
@@ -105,7 +111,7 @@ public class NoteServiceTest {
     }
 
     @Test
-    public void TestVoidAddWithNormalNote(){
+    public void TestAddWithLegalNote(){
         note.setName("some");
         User user = new User();
         user.setId(1);
@@ -117,7 +123,7 @@ public class NoteServiceTest {
     }
 
     @Test
-    public void TestVoidUpdateWithNormalNote(){
+    public void TestUpdateWithLegalNote(){
         note.setName("some");
         User user = new User();
         user.setId(1);
@@ -129,39 +135,53 @@ public class NoteServiceTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void TestVoidDeleteWithIdNull(){
+    public void TestDeleteWithIdNull(){
         noteService.delete(null);
     }
 
     @Test(expected = ValidationException.class)
-    public void TestVoidDeleteWithIdZero(){
+    public void TestDeleteWithIdZero(){
         noteService.delete(0);
     }
 
     @Test
-    public void TestVoidDeleteWithNormalId(){
+    public void TestDeleteWithLegalId(){
         doNothing().when(noteStore).delete(isA(Integer.class));
         noteService.delete(1);
         verify(noteStore, times(1)).delete(1);
     }
 
     @Test(expected = ValidationException.class)
-    public void TestNoteServiceFindOneWithNullId(){
+    public void TestFindOneWithNullId(){
         noteService.findOne(null);
     }
 
+    @Test (expected = ValidationException.class)
+    public void TestFindOneWithZeroId(){
+        noteService.findOne(0);
+    }
+
     @Test
-    public void TestNoteServiceFindOneWithLegalArgument (){
+    public void TestAddWithLegalArgument(){
+        doNothing().when(noteStore).add(isA(Note.class));
+        User user = new User();
+        user.setId(1);
+        note.setUser(user);
+        note.setName("some");
+        noteService.add(note);
+        verify(noteStore, times(1)).add(note);
+    }
+
+    @Test
+    public void TestFindOneWithLegalArgument (){
         when(noteStore.findOne(1)).thenReturn(new Note());
         assertEquals(noteService.findOne(1), noteStore.findOne(1));
     }
 
     @Test
-    public void TestNoteServiceFindAll (){
+    public void TestFindAllWithLegalArgument (){
         List<Note> list = new ArrayList<>();
         when(noteStore.findAll()).thenReturn(list);
         assertEquals(noteService.findAll(), noteStore.findAll());
     }
-
-
 }
