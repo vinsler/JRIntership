@@ -11,12 +11,12 @@ public class NoteService {
     private Store NOTESTORE = NoteStore.getInstance();
 
     public void add(Note note) {
-        checkNote(note, 1);
+        checkAddUpdate(note, 1);
         NOTESTORE.add(note);
     }
 
     public void update(Note note, Integer i) {
-        checkNote(note, i);
+        checkAddUpdate(note, i);
         NOTESTORE.update(note, i);
     }
 
@@ -42,12 +42,12 @@ public class NoteService {
 
     }
 
-    private void checkNote(Note note, Integer i) {
+    private void checkAddUpdate(Note note, Integer i) {
         if (note == null) {
             throw new ValidationException("ERR_NOTE_NOT_FOUND");
         }else if (i == null || i <= 0) {
             throw new ValidationException("ERR_ID");
-        } else if (note.getName() == null) {
+        } else if (note.getName() == null || note.getName().isEmpty()) {
             throw new ValidationException("ERR_NAME");
         } else if (note.getUser() == null) {
             throw new ValidationException("ERR_USER_NOT_FOUND");

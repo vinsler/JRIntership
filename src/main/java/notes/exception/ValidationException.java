@@ -12,7 +12,7 @@ public class ValidationException extends RuntimeException {
         errorMap.put("ERR_NAME", "Service error, check name!");
         errorMap.put("ERR_LOGIN", "Service error, check login!");
         errorMap.put("ERR_PASSWORD", "Service error, check password!");
-        errorMap.put("ERR_UPDATE", "Service error, check input for update!");
+        errorMap.put("ERR_UPDATE", "Service error, check id for update!");
         errorMap.put("ERR_DELETE", "Service error, check id for delete!");
         errorMap.put("ERR_NOT_FOUND", "Service error, resources not found!");
         errorMap.put("ERR_USER_NOT_FOUND", "Service error, User object not found!");

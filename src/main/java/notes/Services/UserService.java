@@ -12,21 +12,14 @@ public class UserService {
     private static final Store USERSTORE = UserStore.getInstance();
 
     public void add(User user){
-        if (user.getName() == null) {
-            throw new ValidationException("ERR_NAME");
-        }  else if (user.getLogin() == null) {
-            throw new ValidationException("ERR_LOGIN");
-        } else if (user.getPassword() == null) {
-            throw new ValidationException("ERR_PASSWORD");
-        }
+        checkAddUpdate(user);
         USERSTORE.add(user);
     }
 
-    public void update (User user, Integer i){
-        if (user == null) {
-            throw new ValidationException("ERR_USER_NOT_FOUND");
-        } else if (i == null || i <= 0) {
-            throw new ValidationException("ERR_UPDATE");
+    public void update (User user, Integer i) {
+        checkAddUpdate(user);
+        if (i == null || i <= 0) {
+            throw new ValidationException("ERR_USER_ID");
         }
         USERSTORE.update(user, i);
     }
@@ -48,5 +41,17 @@ public class UserService {
     public List<User> findAll(){
         return USERSTORE.findAll();
 
+    }
+
+    private void checkAddUpdate(User user){
+        if (user == null) {
+            throw new ValidationException("ERR_USER_NOT_FOUND");
+        }else if (user.getName() == null || user.getName().isEmpty()) {
+            throw new ValidationException("ERR_NAME");
+        }  else if (user.getLogin() == null || user.getLogin().isEmpty()) {
+            throw new ValidationException("ERR_LOGIN");
+        } else if (user.getPassword() == null || user.getPassword().isEmpty()) {
+            throw new ValidationException("ERR_PASSWORD");
+        }
     }
 }

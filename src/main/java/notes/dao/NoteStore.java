@@ -13,6 +13,7 @@ import java.util.Properties;
 
 public class NoteStore implements Store<Note, Integer>{
     private static final Store INSTANCE = new NoteStore();
+
     private static final String PROPERTIES_URL = "src/main/resources/NoteQuery.properties";
     private static final Connector CONNECTOR = Connector.getInstance();
     private static final Properties PROPERTIES = new Properties();
@@ -83,9 +84,7 @@ public class NoteStore implements Store<Note, Integer>{
                 if (!result.next()) {
                     return null;
                 }
-                else {
-                    return constructNote(result);
-                }
+                return constructNote(result);
             }
         } catch (SQLException e) {
             throw new SqlAccessException(SQL_ERR_MSG, e);
