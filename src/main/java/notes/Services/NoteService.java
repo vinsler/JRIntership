@@ -25,7 +25,6 @@ public class NoteService {
             throw new ValidationException("ERR_ID");
         }
         NOTESTORE.delete(i);
-
     }
 
     public Note findOne(Integer i) {
@@ -33,13 +32,10 @@ public class NoteService {
             throw new ValidationException("ERR_ID");
         }
         return (Note) NOTESTORE.findOne(i);
-
     }
 
     public List<Note> findAll() {
-
         return NOTESTORE.findAll();
-
     }
 
     private void checkAddUpdate(Note note, Integer i) {

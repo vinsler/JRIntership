@@ -5,11 +5,10 @@ import notes.dao.UserStore;
 import notes.exception.ValidationException;
 import notes.model.User;
 
-
 import java.util.List;
 
 public class UserService {
-    private static final Store USERSTORE = UserStore.getInstance();
+    private Store USERSTORE = UserStore.getInstance();
 
     public void add(User user){
         checkAddUpdate(user);
@@ -40,7 +39,6 @@ public class UserService {
 
     public List<User> findAll(){
         return USERSTORE.findAll();
-
     }
 
     private void checkAddUpdate(User user){
