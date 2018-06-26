@@ -10,8 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -147,7 +148,6 @@ public class UserServiceTest {
         userService.update(user, -1);
     }
 
-
     @Test(expected = ValidationException.class)
     public void TestDeleteNull(){
         userService.delete(null);
@@ -163,26 +163,39 @@ public class UserServiceTest {
         userService.delete(-1);
     }
 
+    @Test
+    public void TestDeleteWithLegalId() {
+        doNothing().when(userStore).delete(isA(Integer.class));
+        userService.delete(1);
+        verify(userStore, times(1)).delete(1);
+    }
+
     @Test (expected = ValidationException.class)
-    public void TestFindNull(){
+    public void TestFindOneNull(){
         userService.findOne(null);
     }
 
     @Test (expected = ValidationException.class)
-    public void TestFindZero(){
+    public void TestFindOneZero(){
         userService.findOne(0);
     }
 
     @Test (expected = ValidationException.class)
-    public void TestFindMinus(){
+    public void TestFindOneMinus(){
         userService.findOne(-1);
     }
 
-//    @Test
-//    public void TestFindOneWithLegalArgument(){
-//        when(userStore.findOne(1)).thenReturn(new User());
-//        assertEquals(userService.findOne(1), userStore.findOne(1));
-//    }
+    @Test
+    public void TestFindOneWithLegalArgument(){
+        when(userStore.findOne(1)).thenReturn(new User());
+        assertEquals(userService.findOne(1), userStore.findOne(1));
+    }
+
+    @Test
+    public void TestFindAllWithLegalArgument(){
+        when(userStore.findAll()).thenReturn(new ArrayList<User>());
+        assertEquals(userService.findAll(), userStore.findAll());
+    }
 
 
 

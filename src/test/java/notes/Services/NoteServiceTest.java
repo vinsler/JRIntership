@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -180,8 +179,7 @@ public class NoteServiceTest {
 
     @Test
     public void TestFindAllWithLegalArgument (){
-        List<Note> list = new ArrayList<>();
-        when(noteStore.findAll()).thenReturn(list);
+        when(noteStore.findAll()).thenReturn(new ArrayList<Note>());
         assertEquals(noteService.findAll(), noteStore.findAll());
     }
 }
