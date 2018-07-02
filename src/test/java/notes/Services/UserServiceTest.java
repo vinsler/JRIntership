@@ -196,12 +196,4 @@ public class UserServiceTest {
         when(userStore.findAll()).thenReturn(new ArrayList<User>());
         assertEquals(userService.findAll(), userStore.findAll());
     }
-
-
-
-
-
-
-
-
 }
