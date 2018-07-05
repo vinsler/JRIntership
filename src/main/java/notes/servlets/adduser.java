@@ -1,4 +1,4 @@
-package notes.servlet;
+package notes.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -7,14 +7,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class addservlet extends HttpServlet {
+public class adduser extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //super.doGet(req, resp);
         PrintWriter pw = resp.getWriter();
         pw.println("<HTML>");
-        pw.println("<h1> Add note </h1>");
+        pw.println("<h1 align=\"center\"> please enter you name </h1>");
         pw.println("</HTML>");
+        pw.close();
     }
 
 
