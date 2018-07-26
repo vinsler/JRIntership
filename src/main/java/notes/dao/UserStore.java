@@ -86,6 +86,21 @@ public class UserStore implements Store<User, Integer> {
         }
     }
 
+    public User findLogin(User user) {
+        try (Connection connection = CONNECTOR.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findByLogin"))) {
+            preparedStatement.setString(1, user.getLogin());
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return null;
+                }
+                return new User();
+            }
+        } catch (SQLException e) {
+            throw new SqlAccessException(SQL_ERR_MSG, e);
+        }
+    }
+
     public List<User> findAll (){
         List<User> listUsers = new ArrayList<>();
         try (Connection connection = CONNECTOR.getConnection();

@@ -8,4 +8,5 @@ public interface Store<T, ID> {
     void delete(ID i);
     T findOne(ID i);
     List<T> findAll();
+    T findLogin(T t);
 }

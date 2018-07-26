@@ -13,6 +13,11 @@ public class UserService {
     public void add(User user){
         checkAddUpdate(user);
         USERSTORE.add(user);
+//        if (USERSTORE.findLogin(user) == null) {
+//            USERSTORE.add(user);
+//        } else {
+//            throw new ValidationException("ERR_LOGIN");
+//        }
     }
 
     public void update (User user, Integer i) {

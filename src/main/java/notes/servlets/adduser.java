@@ -8,37 +8,29 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class adduser extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //super.doGet(req, resp);
-//        PrintWriter writer = resp.getWriter();
-//        writer.println("method doGet from adduser.");
-
-
-    }
+    private static final UserService USER_SERVICE = new UserService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
 
         PrintWriter pw = resp.getWriter();
-        pw.println("name-" + name + ", login- " + login + ", password- " + password);
+        pw.println(new File("").getAbsolutePath());
+
+        System.out.println("asdfasdf");
+
+        User user = new User();
+        user.setName(req.getParameter("name"));
+        user.setLogin(req.getParameter("login"));
+        user.setPassword(req.getParameter("password"));
+
+        USER_SERVICE.add(user);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("view/viewnote.jsp");
         requestDispatcher.forward(req, resp);
-//
-//        UserService userService = new UserService();
-//        User user = new User();
-//        user.setName(name);
-//        user.setLogin(login);
-//        user.setPassword(password);
-//        userService.add(user);
     }
 }

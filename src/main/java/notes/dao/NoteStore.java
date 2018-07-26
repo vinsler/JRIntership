@@ -105,6 +105,11 @@ public class NoteStore implements Store<Note, Integer>{
         }
     }
 
+    @Override
+    public Note findLogin(Note note) {
+        return null;
+    }
+
     private Note constructNote(ResultSet resultSet) throws SQLException {
         Note note = new Note();
         note.setId(resultSet.getInt(1));
