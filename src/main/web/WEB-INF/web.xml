@@ -6,16 +6,6 @@
          version="3.0">
 
     <servlet>
-        <servlet-name>addnote</servlet-name>
-        <servlet-class>notes.servlets.addnote</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>addnote</servlet-name>
-        <url-pattern>/addnote</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>adduser</servlet-name>
         <servlet-class>notes.servlets.adduser</servlet-class>
     </servlet>
@@ -23,6 +13,36 @@
     <servlet-mapping>
         <servlet-name>adduser</servlet-name>
         <url-pattern>/adduser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>loginuser</servlet-name>
+        <servlet-class>notes.servlets.loginuser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>loginuser</servlet-name>
+        <url-pattern>/loginuser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>viewnote</servlet-name>
+        <servlet-class>notes.servlets.viewnote</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>viewnote</servlet-name>
+        <url-pattern>/viewnote</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addnote</servlet-name>
+        <servlet-class>notes.servlets.addnote</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addnote</servlet-name>
+        <url-pattern>/addnote</url-pattern>
     </servlet-mapping>
 
 </web-app>
