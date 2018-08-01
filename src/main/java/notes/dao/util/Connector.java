@@ -2,7 +2,6 @@ package notes.dao.util;
 
 import com.mysql.fabric.jdbc.FabricMySQLDriver;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +17,6 @@ public class Connector {
 
     static  {
         try {
-            //Class.forName("com.mysql.fabric.jdbc");
             DriverManager.registerDriver(new FabricMySQLDriver());
             PROPERTIES.load(new FileInputStream(PROPERTIES_URL));
         } catch (Exception e) {

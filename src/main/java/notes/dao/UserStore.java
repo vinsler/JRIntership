@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class UserStore implements Store<User, Integer> {
-    private static final Store INSTANCE = new UserStore();
+    private static Store INSTANCE = new UserStore();
 
     private static final Connector CONNECTOR = Connector.getInstance();
     private static final String PROPERTIES_URL = "src/main/resources/UsersQuery.properties";
