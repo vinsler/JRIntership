@@ -18,15 +18,15 @@ public class UserStore implements Store<User, Integer> {
     private static Store INSTANCE = new UserStore();
 
     private static final Connector CONNECTOR = Connector.getInstance();
-    private static final String PROPERTIES_URL = "src/main/resources/UsersQuery.properties";
+    //private static final String PROPERTIES_URL = "src/main/resources/UsersQuery.properties";
     private static final Properties PROPERTIES = new Properties();
     private static final String SQL_ERR_MSG = "Error executing User query!";
 
     static {
         try {
-            PROPERTIES.load(new FileInputStream(PROPERTIES_URL));
+            PROPERTIES.load(CONNECTOR.getClass().getClassLoader().getResourceAsStream("UsersQuery.properties"));
         } catch (IOException e){
-            throw new IllegalArgumentException("ERROR! Can't find file " + PROPERTIES_URL, e);
+            throw new IllegalArgumentException("ERROR! Can't find file ", e);
         }
     }
 
@@ -91,7 +91,7 @@ public class UserStore implements Store<User, Integer> {
         PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findByLogin"))) {
             preparedStatement.setString(1, user.getLogin());
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                if (!resultSet.next()) {
                     return null;
                 }
                 return new User();
