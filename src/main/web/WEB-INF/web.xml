@@ -5,11 +5,20 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
+
+    <servlet>
+        <servlet-name> showalluser </servlet-name>
+        <servlet-class> notes.servlets.ShowAllUserServlet </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name> showalluser </servlet-name>
+        <url-pattern> /showalluser </url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>adduser</servlet-name>
         <servlet-class>notes.servlets.adduser</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>adduser</servlet-name>
         <url-pattern>/adduser</url-pattern>

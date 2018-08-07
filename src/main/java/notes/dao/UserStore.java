@@ -4,7 +4,6 @@ import notes.dao.util.Connector;
 import notes.exception.SqlAccessException;
 import notes.model.User;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +17,6 @@ public class UserStore implements Store<User, Integer> {
     private static Store INSTANCE = new UserStore();
 
     private static final Connector CONNECTOR = Connector.getInstance();
-    //private static final String PROPERTIES_URL = "src/main/resources/UsersQuery.properties";
     private static final Properties PROPERTIES = new Properties();
     private static final String SQL_ERR_MSG = "Error executing User query!";
 
