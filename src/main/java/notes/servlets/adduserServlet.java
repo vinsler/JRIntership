@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class adduser extends HttpServlet {
+public class adduserServlet extends HttpServlet {
     private static final UserService USER_SERVICE = new UserService();
 
     @Override
@@ -24,14 +24,15 @@ public class adduser extends HttpServlet {
         try {
             USER_SERVICE.add(user);
         } catch (ValidationException e) {
-                req.setAttribute("message", "pls check you login");
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/adduser.jsp");
-                requestDispatcher.forward(req, resp);
-                return;
+            req.setAttribute("message", "pls check you login");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/adduser.jsp");
+            requestDispatcher.forward(req, resp);
+            return;
         }
 
-        req.setAttribute("user", user);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/ShowAllUser.jsp");
-        requestDispatcher.forward(req, resp);
+        //req.setAttribute("user", user);
+        //RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/viewnote.jsp");
+        resp.sendRedirect("/showalluser"); // todo
+        //requestDispatcher.forward(req, resp);
     }
 }

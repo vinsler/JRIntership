@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class loginuser extends HttpServlet {
+public class loginuserServlet extends HttpServlet {
     private final UserService USER_SERVICE = new UserService();
 
     @Override
