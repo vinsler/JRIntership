@@ -8,7 +8,7 @@
 
     <servlet>
         <servlet-name> showalluser </servlet-name>
-        <servlet-class> notes.servlets.ShowAllUserServlet </servlet-class>
+        <servlet-class>notes.servlets.showalluserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name> showalluser </servlet-name>
@@ -17,7 +17,7 @@
 
     <servlet>
         <servlet-name>adduser</servlet-name>
-        <servlet-class>notes.servlets.adduser</servlet-class>
+        <servlet-class>notes.servlets.adduserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>adduser</servlet-name>
@@ -26,7 +26,7 @@
 
     <servlet>
         <servlet-name>loginuser</servlet-name>
-        <servlet-class>notes.servlets.loginuser</servlet-class>
+        <servlet-class>notes.servlets.loginuserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -36,7 +36,7 @@
 
     <servlet>
         <servlet-name>viewnote</servlet-name>
-        <servlet-class>notes.servlets.viewnote</servlet-class>
+        <servlet-class>notes.servlets.viewnoteServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -46,7 +46,7 @@
 
     <servlet>
         <servlet-name>addnote</servlet-name>
-        <servlet-class>notes.servlets.addnote</servlet-class>
+        <servlet-class>notes.servlets.addnoteServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
