@@ -8,6 +8,10 @@
     </head>
 
     <body>
+        <header>
+            <h2 class="tab">  view note page </h2>
+        </header>
+
         <h1 align="center"> servlet view note </h1>
 
     </body>

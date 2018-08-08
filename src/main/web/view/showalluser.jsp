@@ -18,11 +18,11 @@
         <a href="/view/loginuser.jsp"> Login user </a>
     </h2>
 
-    <form action="/ShowAllUserServlet" method="get">
+    <form>
         <table border="1" cellpadding="5" class="tab">
-            <caption>
+            <header>
                 <h2> List of users </h2>
-            </caption>
+            </header>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -37,6 +37,10 @@
                 </c:forEach>
         </table>
     </form>
+
+    <h2 class="tab">
+        <a href="/index.html"> Get Start Page </a>
+    </h2>
 
 </body>
 
