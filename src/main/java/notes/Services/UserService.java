@@ -45,6 +45,17 @@ public class UserService {
         return USERSTORE.findAll();
     }
 
+    public User findLogin (User user) {
+        if (user == null) {
+            throw new ValidationException("ERR_USER_NOT_FOUND");
+        } else if (user.getLogin() == null) {
+            throw new ValidationException("ERR_LOGIN");
+        } else if (user.getPassword() == null) {
+            throw new ValidationException("ERR_PASSWORD");
+        }
+        return (User) USERSTORE.findLogin(user) ;
+    }
+
     private void checkAddUpdate(User user){
         if (user == null) {
             throw new ValidationException("ERR_USER_NOT_FOUND");

@@ -92,7 +92,7 @@ public class UserStore implements Store<User, Integer> {
                 if (!resultSet.next()) {
                     return null;
                 }
-                return new User();
+                return constructUser(resultSet);
             }
         } catch (SQLException e) {
             throw new SqlAccessException(SQL_ERR_MSG, e);
@@ -112,6 +112,7 @@ public class UserStore implements Store<User, Integer> {
             throw new SqlAccessException(SQL_ERR_MSG, e);
         }
     }
+
 
     private User constructUser(ResultSet resultSet) throws SQLException {
         User user = new User();

@@ -14,16 +14,15 @@ import java.util.Properties;
 public class NoteStore implements Store<Note, Integer>{
     private static final Store INSTANCE = new NoteStore();
 
-    private static final String PROPERTIES_URL = "src/main/resources/NoteQuery.properties";
     private static final Connector CONNECTOR = Connector.getInstance();
     private static final Properties PROPERTIES = new Properties();
     private static final String SQL_ERR_MSG = "Error executing Note query!";
 
     static {
         try {
-            PROPERTIES.load(new FileInputStream(PROPERTIES_URL));
+            PROPERTIES.load(CONNECTOR.getClass().getClassLoader().getResourceAsStream("NoteQuery.properties"));
         } catch (IOException e) {
-            throw new IllegalArgumentException("ERROR! Can't find file " + PROPERTIES_URL, e);
+            throw new IllegalArgumentException("ERROR! Can't find file ", e);
         }
     }
 
