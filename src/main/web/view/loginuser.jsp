@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -19,6 +20,13 @@
             <input type="text" name="login" value="enter login" size="20" maxlength="10"> login <br><br>
             <input type="password" name="password" value="" size="20" maxlength="32"> password <br><br>
             <input type="submit" value="submit"/>
+
+            <c:if test="${message != null}">
+                <i style="color: red">
+                    <c:out value="${message}" />
+                </i>
+            </c:if>
+
         </form>
     </body>
 
