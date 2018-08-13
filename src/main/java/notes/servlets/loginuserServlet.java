@@ -20,17 +20,24 @@ public class loginuserServlet extends HttpServlet {
         User user = new User();
         user.setLogin(req.getParameter("login"));
         user.setPassword(req.getParameter("password"));
-        try {
-            USER_SERVICE.findLogin(user);
-        } catch (ValidationException e) {
-            req.setAttribute("message", "pls check you data");
+        User userT = new User();
+
+        userT = USER_SERVICE.findLogin(user);
+        if (userT == null) {
+            req.setAttribute("message", "pls check you login");
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/loginuser.jsp");
             requestDispatcher.forward(req, resp);
             return;
+        } else if (userT.getPassword().equals(user.getPassword())) {
+            HttpSession session = req.getSession();
+            session.setAttribute("login", user.getLogin());
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/viewnote");
+            requestDispatcher.forward(req, resp);
+            return;
         }
-        HttpSession session = req.getSession();
-        session.setAttribute("login", user.getLogin());
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/viewnote");
+        req.setAttribute("message", "pls check you password");
+        req.setAttribute("log", user.getLogin());
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/loginuser.jsp");
         requestDispatcher.forward(req, resp);
     }
 
