@@ -21,7 +21,7 @@
     <form>
         <table border="1" cellpadding="5" class="tab">
             <header>
-                <h2> List of users </h2>
+                <h2 class="tab" List of users </h2>
             </header>
             <tr>
                 <th>ID</th>

@@ -17,9 +17,9 @@
         </header>
 
         <form action="/adduser" class="tab" method="post">
-            <input type="text" name="name" value="add name" size="20" maxlength="10"> name
+            <input type="text" name="name" size="20" maxlength="10"> name
             <br><br>
-            <input type="text" name="login" value="add login" size="20" maxlength="10"> login &nbsp;&nbsp;
+            <input type="text" name="login" size="20" maxlength="10"> login &nbsp;&nbsp;
 
                 <c:if test="${message != null}">
                 <i style="color: red">
