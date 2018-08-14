@@ -13,8 +13,11 @@
 
     <body>
         <header>
-            <h2 class="tab">  login user page </h2>
+            <h2 class="tab"> login user page </h2>
         </header>
+
+        <button class="tab" onclick= "location.href = '/showalluser' "> Show all user </button>
+        <br> <br>
 
         <form action="/loginuser" class="tab" method="get">
             <input type="text" name="login" value="${log}" size="20" maxlength="10"> login <br><br>
@@ -22,9 +25,9 @@
             <input type="submit" value="submit"/>
 
             <c:if test="${message != null}">
-                <i style="color: red">
+                <strong style="color: red">
                     <c:out value="${message}" />
-                </i>
+                </strong>
             </c:if>
 
         </form>
