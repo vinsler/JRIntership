@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -19,7 +19,7 @@
         <button class="tab" onclick= "location.href = '/showalluser' "> Show all user </button>
         <br> <br>
 
-        <form action="/loginuser" class="tab" method="get">
+        <form action="/loginuser" class="tab" method="post">
             <input type="text" name="login" value="${log}" size="20" maxlength="10"> login <br><br>
             <input type="password" name="password" size="20" maxlength="32"> password <br><br>
             <input type="submit" value="submit"/>
@@ -29,8 +29,8 @@
                     <c:out value="${message}" />
                 </strong>
             </c:if>
-
         </form>
+
     </body>
 
 </html>

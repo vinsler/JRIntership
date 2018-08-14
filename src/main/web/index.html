@@ -1,17 +1,60 @@
 <!DOCTYPE html>
 <html>
+
+<style type="text/css">
+    .footer {
+        border: 4px solid;border-color: darkslateblue;
+        position: absolute;
+        bottom: 5px;
+        width: 98%;
+        height: 100px;   /* Высота блока footer */
+        background: linen;
+    }
+    .header {
+        border: 4px solid;border-color: darkslateblue;
+        width:98%;
+        margin: 0 auto;
+        padding:10px;
+        background: linen;
+        height: 70px;
+    }
+</style>
+
     <head>
         <title> Notes </title>
     </head>
 
     <body>
-        <header>
-            <h2 align="center">  welcome to start page </h2>
-        </header>
+        <div class="header">
+            <h2 align="center" style="color: darkslateblue">
+                <em>
+                    Welcome to start page
+                </em>
+            </h2>
+        </div>
+        <br>
+        <h4 align="center">
+            <em>
+                Please select you action.
+            </em>
+        </h4>
+
         <div role="main" align="center" >
             <button onclick= "location.href = '/view/adduser.jsp' "> Add user </button>
             <button onclick= "location.href = '/view/loginuser.jsp' "> Login user</button>
             <button onclick= "location.href = '/showalluser' "> Show all user</button>
         </div>
+
+        <div class="footer">
+            <h4 align="center" style="color: darkslateblue">
+                <em>
+                    This is project for save & view notes <br>
+                    my first experiment specially <br>
+                    for javarush intership.
+                </em>
+            </h4>
+        </div>
+
     </body>
+
 </html>
