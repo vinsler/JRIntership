@@ -12,7 +12,7 @@
 
     <body>
         <header>
-            <h2 class="tab">  view note page </h2>
+            <h2 class="tab"> view note page </h2>
         </header>
 
         <p class="tab">
