@@ -14,7 +14,6 @@ import java.io.IOException;
 public class adduserServlet extends HttpServlet {
     private static final UserService USER_SERVICE = new UserService();
 
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User();
         user.setName(req.getParameter("name"));
@@ -34,9 +33,7 @@ public class adduserServlet extends HttpServlet {
             return;
         }
 
-        //req.setAttribute("user", user);
-        //RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/viewnote.jsp");
         resp.sendRedirect("/showalluser"); // todo
-        //requestDispatcher.forward(req, resp);
+
     }
 }
