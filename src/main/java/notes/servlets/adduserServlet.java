@@ -24,7 +24,11 @@ public class adduserServlet extends HttpServlet {
         try {
             USER_SERVICE.add(user);
         } catch (ValidationException e) {
-            req.setAttribute("message", "pls check you login");
+            req.setAttribute("message", "please check your details!");
+            req.setAttribute("help1", "name, login & password must be entered!");
+            req.setAttribute("help2", "login must be unique!");
+            req.setAttribute("name", user.getName());
+            req.setAttribute("password", user.getPassword());
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/adduser.jsp");
             requestDispatcher.forward(req, resp);
             return;
