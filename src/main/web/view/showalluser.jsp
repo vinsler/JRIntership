@@ -12,10 +12,13 @@
 </style>
 
 <body>
+    <header>
+        <h2 class="tab">  show all user page </h2>
+    </header>
 
     <h2 class="tab">
-        <a href="/view/adduser.jsp"> Add User </a> <br>
-        <a href="/view/loginuser.jsp"> Login user </a>
+        <button onclick="location.href='/view/adduser.jsp' "> Add User </button> &nbsp;
+        <button onclick="location.href ='/view/loginuser.jsp' "> Login user </button>
     </h2>
 
     <form>
@@ -37,10 +40,6 @@
                 </c:forEach>
         </table>
     </form>
-
-    <h2 class="tab">
-        <a href="/index.html"> Get Start Page </a>
-    </h2>
 
 </body>
 
