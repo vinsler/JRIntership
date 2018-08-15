@@ -23,6 +23,10 @@
             <header>
                 <h2 class="tab"> Notes of users </h2>
             </header>
+
+            <button class="tab" onclick= "location.href = '/view/addnote.jsp' "> Add note </button>
+            <br><br>
+
             <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -30,7 +34,7 @@
                 <th>Create Date</th>
                 <th>Status</th>
             </tr>
-            <c:forEach items="${notelist}" var="list" varStatus="status">
+            <c:forEach items="${listnote}" var="list" varStatus="status">
                 <tr>
                     <td><c:out value="${list.id}" /></td>
                     <td><c:out value="${list.name}" /></td>
