@@ -38,6 +38,16 @@ public class NoteService {
         return NOTESTORE.findAll();
     }
 
+    public List<Note> findLoginNote(Note note) {
+        if (note == null) {
+            throw new ValidationException("ERR_NOTE_NOT_FOUND");
+        } else if (note.getUser() == null) {
+            throw new ValidationException("ERR_USER_NOT_FOUND");
+        }
+        List<Note> noteList = NOTESTORE.findLoginNote(note);
+        return noteList;
+    }
+
     private void checkAddUpdate(Note note, Integer i) {
         if (note == null) {
             throw new ValidationException("ERR_NOTE_NOT_FOUND");
