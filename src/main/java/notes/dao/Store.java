@@ -9,4 +9,5 @@ public interface Store<T, ID> {
     T findOne(ID i);
     List<T> findAll();
     T findLogin(T t);
+    List<T> findLoginNote(T t);
 }

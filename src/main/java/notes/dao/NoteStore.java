@@ -104,9 +104,21 @@ public class NoteStore implements Store<Note, Integer>{
         }
     }
 
-    @Override
-    public Note findLogin(Note note) {
-        return null;
+
+    public List<Note> findLoginNote(Note note) {
+        List<Note> listnote = new ArrayList<>();
+        try (Connection connection = CONNECTOR.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(getQuery("findByLogin"))){
+            preparedStatement.setInt(1, note.getUser().getId());
+            try (ResultSet result = preparedStatement.executeQuery()){
+                while(result.next()) {
+                    listnote.add(constructNote(result));
+                }
+                return listnote;
+            }
+        } catch (SQLException e) {
+            throw new SqlAccessException(SQL_ERR_MSG, e);
+        }
     }
 
     private Note constructNote(ResultSet resultSet) throws SQLException {
@@ -124,5 +136,9 @@ public class NoteStore implements Store<Note, Integer>{
             throw new RuntimeException("Error, can't find syntax - " + query);
         }
         return PROPERTIES.getProperty(query);
+    }
+
+    public Note findLogin(Note note) {
+        return null;
     }
 }

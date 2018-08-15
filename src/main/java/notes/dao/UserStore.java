@@ -129,4 +129,8 @@ public class UserStore implements Store<User, Integer> {
         }
         return PROPERTIES.getProperty(query);
     }
+
+    public List<User> findLoginNote(User user) {
+        return null;
+    }
 }
