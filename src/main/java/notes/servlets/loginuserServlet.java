@@ -1,7 +1,9 @@
 package notes.servlets;
 
+import notes.Services.NoteService;
 import notes.Services.UserService;
 import notes.exception.ValidationException;
+import notes.model.Note;
 import notes.model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -11,9 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 public class loginuserServlet extends HttpServlet {
     private final UserService USER_SERVICE = new UserService();
+    private NoteService noteService = new NoteService();
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User();
@@ -30,7 +34,13 @@ public class loginuserServlet extends HttpServlet {
         } else if (userT.getPassword().equals(user.getPassword())) {
             HttpSession session = req.getSession();
             session.setAttribute("login", user.getLogin());
-            resp.sendRedirect("/viewnote");
+
+            Note note = new Note();
+            note.setUser(userT);
+            List<Note> notelist = noteService.findLoginNote(note);
+            req.setAttribute("listnote", notelist);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/viewnote.jsp");
+            requestDispatcher.forward(req, resp);
             return;
         }
         req.setAttribute("message", "pls check you password");

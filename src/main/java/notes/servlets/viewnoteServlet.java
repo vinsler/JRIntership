@@ -1,6 +1,7 @@
 package notes.servlets;
 
 import notes.Services.NoteService;
+import notes.Services.UserService;
 import notes.model.Note;
 import notes.model.User;
 
@@ -14,13 +15,17 @@ import java.util.List;
 
 public class viewnoteServlet extends HttpServlet {
     private NoteService noteService = new NoteService();
+    private final UserService USER_SERVICE = new UserService();
 
-    @Override
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = new User();
+        user.setLogin(req.getParameter("login"));
+        Note note = new Note();
+        note.setUser(USER_SERVICE.findLogin(user));
 
-        List<Note> notelist =  noteService.findAll(); // todo add findbylogin in notes
-
-        req.setAttribute("notelist", notelist);
+        List<Note> notelist = noteService.findLoginNote(note);
+        req.setAttribute("listnote", notelist);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/view/viewnote.jsp");
         dispatcher.forward(req, resp);
     }
