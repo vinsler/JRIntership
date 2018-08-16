@@ -56,6 +56,10 @@ public class UserService {
         return (User) USERSTORE.findLogin(user) ;
     }
 
+    public User findLoginBySession(User user) {
+        return (User) USERSTORE.findLogin(user);
+    }
+
     private void checkAddUpdate(User user){
         if (user == null) {
             throw new ValidationException("ERR_USER_NOT_FOUND");

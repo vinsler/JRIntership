@@ -20,9 +20,9 @@ public class viewnoteServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User();
-        user.setLogin(req.getParameter("login"));
+        user.setLogin(req.getSession().getAttribute("login").toString());
         Note note = new Note();
-        note.setUser(USER_SERVICE.findLogin(user));
+        note.setUser(USER_SERVICE.findLoginBySession(user));
 
         List<Note> notelist = noteService.findLoginNote(note);
         req.setAttribute("listnote", notelist);
