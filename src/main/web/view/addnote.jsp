@@ -20,12 +20,20 @@
         <form action="/addnote" class="tab" method="post">
             <input type="text" name="name" value="${name}" size="20" maxlength="10"> name
             <br><br>
-            <input type="text" name="description" value="${description}" size="20" maxlength="10"> description
+            <input type="text" name="description" value="${description}" size="20" maxlength="100"> description
             <br><br>
-            <input type="checkbox" name="status" value="0" size="20" maxlength="32"> status
+            <input type="checkbox" name="status" size="20" maxlength="32"> status
             <br><br>
             <input type="submit" value="submit"/>
             <br><br>
+
+            <c:if test="${help != null}">
+                <em style="color: red">
+                    <c:out value="${help}"></c:out>
+                </em>
+            </c:if>
+
+
         </form>
 
 
