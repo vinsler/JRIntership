@@ -28,14 +28,30 @@
             <br><br>
 
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Create Date</th>
-                <th>Status</th>
+                <th>DEL</th>
+                <th>
+                    <a href = "/sortnote?id=1"> ID </a>
+                </th>
+                <th>
+                    <a href = "/sortnote?id=2"> NAME </a>
+                </th>
+                <th>
+                    <a href = "/sortnote?id=3"> Description </a>
+                </th>
+                <th>
+                    <a href = "/sortnote?id=4"> Create Date </a>
+                </th>
+                <th>
+                    <a href = "/sortnote?id=5"> Status </a>
+                </th>
             </tr>
+
+
             <c:forEach items="${listnote}" var="list" varStatus="status">
                 <tr>
+                    <td>
+                        <a href = "/deletenote?id=${list.id}"> delete </a>
+                    </td>
                     <td><c:out value="${list.id}" /></td>
                     <td><c:out value="${list.name}" /></td>
                     <td><c:out value="${list.description}" /></td>

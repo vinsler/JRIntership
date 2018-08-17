@@ -14,8 +14,11 @@ public class deletenoteServlet extends HttpServlet {
     private final UserService USER_SERVICE = new UserService();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        noteService.delete(Integer.valueOf(req.getParameter("id")));
+        resp.sendRedirect("/viewnote");
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
     }
 }
