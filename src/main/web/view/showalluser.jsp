@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8"
+%>
 
 <html>
 
@@ -24,7 +26,7 @@
     <form>
         <table border="1" cellpadding="5" class="tab">
             <header>
-                <h2 class="tab" List of users </h2>
+                <h2 class="tab"> List of users </h2>
             </header>
             <tr>
                 <th>ID</th>

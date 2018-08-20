@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8"
+%>
 
 <html>
     <style type="text/css">
@@ -16,7 +18,7 @@
         </header>
 
         <p class="tab">
-            <c:out value="${login}"/> &nbsp; : user online
+            <c:out value="${user.login}"/> &nbsp; : user online
         </p>
 
         <table border="1" cellpadding="5" class="tab">
@@ -28,7 +30,7 @@
             <br><br>
 
             <tr>
-                <th>DEL</th>
+                <th>DEL \ SORT</th>
                 <th>
                     <a href = "/sortnote?id=1"> ID </a>
                 </th>
@@ -57,8 +59,13 @@
                     <td><c:out value="${list.description}" /></td>
                     <td><c:out value="${list.createDate}" /></td>
                     <td><c:out value="${list.status}" /></td>
+                    <td>
+                        <a href = "/updatenote?id=${list.id}"> update </a>
+                    </td>
                 </tr>
             </c:forEach>
+
+            <button class="tab" onclick= "location.href = '/index.html' "> Log out </button>
         </table>
     </body>
 
