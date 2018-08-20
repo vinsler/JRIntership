@@ -58,4 +58,13 @@
         <url-pattern>/deletenote</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>updatenote</servlet-name>
+        <servlet-class>notes.servlets.updatenoteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updatenote</servlet-name>
+        <url-pattern>/updatenote</url-pattern>
+    </servlet-mapping>
+
 </web-app>
