@@ -21,8 +21,4 @@ public class showalluserServlet extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
-
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
 }

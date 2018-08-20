@@ -20,12 +20,14 @@ public class viewnoteServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User();
-        user.setLogin(req.getSession().getAttribute("login").toString());
+        user = (User) req.getSession().getAttribute("user");
         Note note = new Note();
-        note.setUser(USER_SERVICE.findLoginBySession(user));
+        note.setUser(USER_SERVICE.findLogin(user));
 
         List<Note> notelist = noteService.findLoginNote(note);
         req.setAttribute("listnote", notelist);
+        req.setAttribute("user", user);
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/view/viewnote.jsp");
         dispatcher.forward(req, resp);
     }

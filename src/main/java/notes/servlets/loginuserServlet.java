@@ -33,7 +33,7 @@ public class loginuserServlet extends HttpServlet {
             return;
         } else if (userT.getPassword().equals(user.getPassword())) {
             HttpSession session = req.getSession();
-            session.setAttribute("login", user.getLogin());
+            session.setAttribute("user", userT);
 
             Note note = new Note();
             note.setUser(userT);

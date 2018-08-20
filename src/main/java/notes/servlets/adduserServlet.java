@@ -32,8 +32,6 @@ public class adduserServlet extends HttpServlet {
             requestDispatcher.forward(req, resp);
             return;
         }
-
-        resp.sendRedirect("/showalluser"); // todo
-
+        resp.sendRedirect("/showalluser");
     }
 }

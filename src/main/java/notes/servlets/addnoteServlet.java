@@ -16,7 +16,6 @@ import java.util.List;
 
 public class addnoteServlet extends HttpServlet {
     private NoteService noteService = new NoteService();
-    private final UserService USER_SERVICE = new UserService();
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Note note = new Note();
@@ -30,8 +29,8 @@ public class addnoteServlet extends HttpServlet {
         note.setName(req.getParameter("name"));
         note.setDescription(req.getParameter("description"));
         User user = new User();
-        user.setLogin(req.getSession().getAttribute("login").toString());
-        note.setUser(USER_SERVICE.findLoginBySession(user));
+        user = (User) req.getSession().getAttribute("user");
+        note.setUser(user);
 
         String checkbox = req.getParameter("status");
         if (checkbox == null) {
