@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8"
-%>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%request.setCharacterEncoding("UTF-8");%>
 
 <html>
 
@@ -25,6 +25,14 @@
             <input type="text" name="status" value="${currentnote.status}"> Status <br> <br>
 
             <input type="submit" value="submit">
+            <br><br>
+
+            <c:if test="${help1 != null}" >
+                <strong style="color: red">
+                    <c:out value="${help1}"/>
+                </strong>
+            </c:if>
+
         </form>
 
     </body>

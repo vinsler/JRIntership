@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8"
-%>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%request.setCharacterEncoding("UTF-8");%>
 
 <html>
     <style type="text/css">
@@ -64,9 +64,11 @@
                     </td>
                 </tr>
             </c:forEach>
-
-            <button class="tab" onclick= "location.href = '/index.html' "> Log out </button>
         </table>
+
+        <br>
+        <button class="tab" onclick= "location.href = '/index.html' "> Log out </button>
+
     </body>
 
 </html>
