@@ -25,6 +25,9 @@ public class viewnoteServlet extends HttpServlet {
         note.setUser(USER_SERVICE.findLogin(user));
 
         List<Note> notelist = noteService.findLoginNote(note);
+
+        // todo sort by id 1-2-3-4-5
+
         req.setAttribute("listnote", notelist);
         req.setAttribute("user", user);
 

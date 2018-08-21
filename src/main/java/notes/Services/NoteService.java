@@ -59,6 +59,8 @@ public class NoteService {
             throw new ValidationException("ERR_USER_NOT_FOUND");
         } else if (note.getUser().getId() < 1 || i < 1) {
             throw new ValidationException("ERR_USER_ID");
+        } else if (note.getStatus() < 0 || note.getStatus() > 1) {
+            throw new ValidationException("ERR_STATUS");
         }
     }
 }
