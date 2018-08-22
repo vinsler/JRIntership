@@ -67,4 +67,13 @@
         <url-pattern>/updatenote</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>sortnote</servlet-name>
+        <servlet-class>notes.servlets.sortnoteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>sortnote</servlet-name>
+        <url-pattern>/sortnote</url-pattern>
+    </servlet-mapping>
+
 </web-app>

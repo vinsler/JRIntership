@@ -20,6 +20,9 @@
 
         <button class="tab" onclick= "location.href = '/showalluser' "> Show all user </button>
         &nbsp;
+        <button onclick= "location.href = '/index.html' "> back </button>
+        &nbsp;
+
         <c:if test="${message != null}">
             <strong style="color: red">
                 <c:out value="${message}" />

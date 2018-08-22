@@ -19,6 +19,8 @@
         </header>
 
         <button class="tab" onclick= "location.href = '/showalluser' "> Show all user </button>
+        &nbsp;
+        <button onclick= "location.href = '/index.html' "> back </button>
         <br> <br>
 
         <form action="/loginuser" class="tab" method="post">

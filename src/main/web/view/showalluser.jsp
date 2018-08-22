@@ -19,8 +19,11 @@
     </header>
 
     <h2 class="tab">
-        <button onclick="location.href='/view/adduser.jsp' "> Add User </button> &nbsp;
+        <button onclick="location.href='/view/adduser.jsp' "> Add User </button>
+        &nbsp;
         <button onclick="location.href ='/view/loginuser.jsp' "> Login user </button>
+        &nbsp;
+        <button onclick= "location.href = '/index.html' "> back </button>
     </h2>
 
     <form>

@@ -19,6 +19,9 @@
             <h2 class="tab"> add note page </h2>
         </header>
 
+        <button class="tab" onclick="location.href = '/viewnote' "> back </button>
+        <br><br>
+
         <form action="/addnote" class="tab" method="post">
             <input type="text" name="name" value="${name}" size="20" maxlength="10"> name
             <br><br>
@@ -26,7 +29,7 @@
             <br><br>
             <input type="checkbox" name="status" size="20" maxlength="32"> status
             <br><br>
-            <input type="submit" value="submit"/>
+            <input type="submit" value="submit"/> &nbsp;
             <br><br>
 
             <c:if test="${help != null}">
@@ -34,14 +37,7 @@
                     <c:out value="${help}"></c:out>
                 </em>
             </c:if>
-
-
         </form>
-
-
-
-
-
     </body>
 
 </html>
