@@ -33,24 +33,24 @@ public class updatenoteServlet extends HttpServlet {
         try {
             Integer tint = Integer.parseInt(req.getParameter("status"));
             if (tint < 0 || tint > 1) {
-                req.setAttribute("help1", "Status must be '0'[not done] or '1'[done]!");
-                req.setAttribute("currentnote", note);
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/updatenote.jsp");
-                requestDispatcher.forward(req, resp);
+                reqSetRequestDispatcher(req, resp);
                 return;
             }
         } catch (NumberFormatException e) {
-            req.setAttribute("help1", "The status must be entered in Number 0-1!");
-            req.setAttribute("currentnote", note);
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/updatenote.jsp");
-            requestDispatcher.forward(req, resp);
+            reqSetRequestDispatcher(req, resp);
             return;
         }
-
 
         note.setStatus(Integer.valueOf(req.getParameter("status")));
         noteService.update(note, note.getId());
         resp.sendRedirect("/viewnote");
+    }
+
+    private void reqSetRequestDispatcher(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("help1", "Status must be '0'[not done] or '1'[done]!");
+        req.setAttribute("currentnote", note);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/updatenote.jsp");
+        requestDispatcher.forward(req, resp);
     }
 }
 
