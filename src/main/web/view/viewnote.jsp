@@ -32,23 +32,23 @@
             <tr>
                 <th>DEL \ SORT</th>
                 <th>
-                    <a href = "/sortnote?id=1"> ID </a>
+                    <button onclick="location.href = '/sortnote?id=1'"> ID </button>
                 </th>
                 <th>
-                    <a href = "/sortnote?id=2"> NAME </a>
+                    <button onclick="location.href = '/sortnote?id=2'"> NAME </button>
                 </th>
                 <th>
-                    <a href = "/sortnote?id=3"> Description </a>
+                    <button onclick="location.href = '/sortnote?id=3'"> DESCRIPTION </button>
                 </th>
                 <th>
-                    <a href = "/sortnote?id=4"> Create Date </a>
+                    <button onclick="location.href = '/sortnote?id=4'"> CREATE DATE </button>
                 </th>
                 <th>
-                    <a href = "/sortnote?id=5"> Status </a>
+                    <button onclick="location.href = '/sortnote?id=5'"> STATUS </button>
                 </th>
             </tr>
 
-
+            <c:if test="${sortnote == null}">
             <c:forEach items="${listnote}" var="list" varStatus="status">
                 <tr>
                     <td>
@@ -64,6 +64,25 @@
                     </td>
                 </tr>
             </c:forEach>
+            </c:if>
+
+            <c:if test="${sortnote != null}">
+                <c:forEach items="${sortnote}" var="list" varStatus="status">
+                    <tr>
+                        <td>
+                            <a href = "/deletenote?id=${list.id}"> delete </a>
+                        </td>
+                        <td><c:out value="${list.id}" /></td>
+                        <td><c:out value="${list.name}" /></td>
+                        <td><c:out value="${list.description}" /></td>
+                        <td><c:out value="${list.createDate}" /></td>
+                        <td><c:out value="${list.status}" /></td>
+                        <td>
+                            <a href = "/updatenote?id=${list.id}"> update </a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </c:if>
         </table>
 
         <br>
