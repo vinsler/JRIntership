@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,36 +21,34 @@ public class sortnoteServlet extends HttpServlet {
     private List<Note> notelist;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         User user = new User();
         user = (User) req.getSession().getAttribute("user");
         Note note = new Note();
         note.setUser(USER_SERVICE.findLogin(user));
         notelist = noteService.findLoginNote(note);
 
-        Integer id = Integer.parseInt(req.getParameter("id"));
-        switch (id) {
-            case 1: {
+        switch (req.getParameter("id")) {
+            case "1": {
                 Collections.sort(notelist, new NoteIdComparator());
                 reqSetRequestDispatcher(req, resp);
                 break;
             }
-            case 2: {
+            case "2": {
                 Collections.sort(notelist, new NoteNameComparator());
                 reqSetRequestDispatcher(req, resp);
                 break;
             }
-            case 3: {
+            case "3": {
                 Collections.sort(notelist, new NoteDescriptionComparator());
                 reqSetRequestDispatcher(req, resp);
                 break;
             }
-            case 4: {
+            case "4": {
                 Collections.sort(notelist, new NoteCreateDateComparator());
                 reqSetRequestDispatcher(req, resp);
                 break;
             }
-            case 5: {
+            case "5": {
                 Collections.sort(notelist, new NoteStatusComparator());
                 reqSetRequestDispatcher(req, resp);
                 break;
