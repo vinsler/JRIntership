@@ -26,7 +26,12 @@ public class viewnoteServlet extends HttpServlet {
 
         List<Note> notelist = noteService.findLoginNote(note);
 
-        req.setAttribute("listnote", notelist);
+        if (req.getAttribute("sortnote") == null) {
+            req.setAttribute("listnote", notelist);
+        } else {
+            req.setAttribute("listnote", req.getAttribute("sortnote"));
+        }
+
         req.setAttribute("user", user);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/view/viewnote.jsp");

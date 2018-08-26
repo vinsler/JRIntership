@@ -39,7 +39,7 @@ public class loginuserServlet extends HttpServlet {
             note.setUser(userT);
             List<Note> notelist = noteService.findLoginNote(note);
             req.setAttribute("listnote", notelist);
-            req.setAttribute("pointer", "0");
+            session.setAttribute("pointer", 0);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/viewnote.jsp");
             requestDispatcher.forward(req, resp);
             return;

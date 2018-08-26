@@ -76,4 +76,13 @@
         <url-pattern>/sortnote</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>selectnote</servlet-name>
+        <servlet-class>notes.servlets.selectnoteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>selectnote</servlet-name>
+        <url-pattern>/selectnote</url-pattern>
+    </servlet-mapping>
+
 </web-app>
