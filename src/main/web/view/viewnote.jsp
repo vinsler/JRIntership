@@ -22,6 +22,7 @@
         </p>
 
         <table border="1" cellpadding="5" class="tab">
+
             <header>
                 <h2 class="tab"> Notes of users </h2>
             </header>
@@ -48,66 +49,43 @@
                 </th>
             </tr>
 
-
             <c:set var="count" scope="page" value="0" />
 
-            <c:if test="${sortnote == null}">
-            <c:forEach items="${listnote}" var="list" varStatus="status">
-                <c:if test="${count < 10}">
-                    <tr>
-                        <td>
-                            <a href = "/deletenote?id=${list.id}"> delete </a>
-                        </td>
-                        <td><c:out value="${list.id}" /></td>
-                        <td><c:out value="${list.name}" /></td>
-                        <td><c:out value="${list.description}" /></td>
-                        <td><c:out value="${list.createDate}" /></td>
-                        <td><c:out value="${list.status}" /></td>
-                        <td>
-                            <a href = "/updatenote?id=${list.id}"> update </a>
-                        </td>
-                        <c:set var="count" value="${count + 1}" scope="page"/>
-                    </tr>
-                </c:if>
-            </c:forEach>
+            <c:if test="${pointer == null}">
+                <c:set var="point" scope="page" value="0" />
+            </c:if>
+            <c:if test="${pointer != null}">
+                <c:set var="point" scope="page" value="${pointer}" />
             </c:if>
 
-            <c:if test="${sortnote != null}">
-                <c:forEach items="${sortnote}" var="list" varStatus="status">
-                    <c:if test="${count < 10}">
-                        <tr>
-                            <td>
-                                <a href = "/deletenote?id=${list.id}"> delete </a>
-                            </td>
-                            <td><c:out value="${list.id}" /></td>
-                            <td><c:out value="${list.name}" /></td>
-                            <td><c:out value="${list.description}" /></td>
-                            <td><c:out value="${list.createDate}" /></td>
-                            <td><c:out value="${list.status}" /></td>
-                            <td>
-                                <a href = "/updatenote?id=${list.id}"> update </a>
-                            </td>
-                            <c:set var="count" value="${count + 1}" scope="page"/>
-                        </tr>
+                <c:forEach items="${listnote}" var="list" varStatus="status">
+                    <c:if test="${count < 10 + point}">
+                        <c:if test="${count >= point}">
+                            <tr>
+                                <td>
+                                    <a href = "/deletenote?id=${list.id}"> delete </a>
+                                </td>
+                                <td><c:out value="${list.id}" /></td>
+                                <td><c:out value="${list.name}" /></td>
+                                <td><c:out value="${list.description}" /></td>
+                                <td><c:out value="${list.createDate}" /></td>
+                                <td><c:out value="${list.status}" /></td>
+                                <td>
+                                    <a href = "/updatenote?id=${list.id}"> update </a>
+                                </td>
+                            </tr>
+                        </c:if>
+                        <c:set var="count" value="${count + 1}" scope="page"/>
                     </c:if>
                 </c:forEach>
-            </c:if>
         </table>
+
+        <c:set var="pointer" value="${count}" scope="request"/>
 
         <br>
         <button class="tab" onclick= "location.href = '/index.html' "> Log out </button> &nbsp;
-
-        <%--<button onclick= ""> <<<--%>
-            <%--<c:set var="pointer" value="${pointer - 10}"/>--%>
-        <%--</button> &nbsp;--%>
-
-        <button onclick= ""> >>>
-            <c:set var="pointer" value="${pointer + 10}"/>
-        </button>
-
-    <c:out value="pointer">
-        POINTER -> ${pointer}
-    </c:out>
+        <button onclick= "location.href = '/selectnote?id=2' "> <<< </button> &nbsp;
+        <button onclick= "location.href = '/selectnote?id=1' "> >>> </button>
 
     </body>
 
