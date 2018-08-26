@@ -58,7 +58,7 @@ public class sortnoteServlet extends HttpServlet {
 
     private void reqSetRequestDispatcher(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("sortnote", notelist);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/viewnote.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/viewnote");
         requestDispatcher.forward(req, resp);
     }
 }
