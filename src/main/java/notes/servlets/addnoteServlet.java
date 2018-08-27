@@ -40,6 +40,7 @@ public class addnoteServlet extends HttpServlet {
         }
         noteService.add(note);
         List<Note> notelist = noteService.findLoginNote(note);
+        req.setAttribute("pointer",  notelist.size() - notelist.size() % 10);
         req.setAttribute("listnote", notelist);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/viewnote.jsp");
         requestDispatcher.forward(req, resp);
