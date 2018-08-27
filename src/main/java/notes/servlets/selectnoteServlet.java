@@ -24,25 +24,30 @@ public class selectnoteServlet extends HttpServlet {
         note.setUser(USER_SERVICE.findLogin(user));
         List<Note> notelist = noteService.findLoginNote(note);
 
-        Integer point =  (int)req.getSession().getAttribute("pointer");
+        List<Note> srtlist = (List<Note>)req.getSession().getAttribute("sortnote");
+        if (srtlist == null) {
+            req.setAttribute("listnote", notelist);
+        } else {
+            req.setAttribute("listnote", srtlist);
+        }
+
+        Integer point = (int)(long)req.getSession().getAttribute("pointer");
         switch (req.getParameter("id")) {
             case "1": {
-                point = point + 10;
-                if (point > notelist.size()) {
-                    point = notelist.size() - 10;
+                if (point >= notelist.size()) {
+                    point = notelist.size() - notelist.size() % 10;
                 }
                 break;
             }
             case "2": {
-                point = point - 10;
+                point = point - 20;
                 if (point < 0) {
                     point = 0;
                 }
                 break;
             }
         }
-        req.setAttribute("pointer", point);
-        req.setAttribute("listnote", notelist);
+        req.getSession().setAttribute("pointer", point);
         req.setAttribute("user", user);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/view/viewnote.jsp");
         dispatcher.forward(req, resp);
