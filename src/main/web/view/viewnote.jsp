@@ -59,7 +59,7 @@
             </c:if>
 
                 <c:forEach items="${listnote}" var="list" varStatus="status">
-                    <c:if test="${count < 10 + point}">
+                    <c:if test="${count < ( point + 10 )}">
                         <c:if test="${count >= point}">
                             <tr>
                                 <td>
@@ -80,7 +80,9 @@
                 </c:forEach>
         </table>
 
-        <c:set var="pointer" value="${count}" scope="request"/>
+        <c:set var="pointer" value="${count}" scope="session"/>
+        <c:out value="${pointer}"/>
+
 
         <br>
         <button class="tab" onclick= "location.href = '/index.html' "> Log out </button> &nbsp;
