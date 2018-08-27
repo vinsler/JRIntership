@@ -26,10 +26,11 @@ public class viewnoteServlet extends HttpServlet {
 
         List<Note> notelist = noteService.findLoginNote(note);
 
-        if (req.getAttribute("sortnote") == null) {
+        List<Note> srtlist = (List<Note>)req.getSession().getAttribute("sortnote");
+        if (srtlist == null) {
             req.setAttribute("listnote", notelist);
         } else {
-            req.setAttribute("listnote", req.getAttribute("sortnote"));
+            req.setAttribute("listnote", srtlist);
         }
 
         req.setAttribute("user", user);
