@@ -1,9 +1,8 @@
 ## Javarush.ru intership  2018
-
-#####==Простое приложение заметки==
+###Простое приложение заметки
 ---
-|++Tech++ |++use in++|++project++|
-|:--------:|
+|Tech|use in|project|
+|-|-|-|
 |Maven|Xml|JDBC|
 |Tomcat|SQL|MySQL|
 |Servlet|JSP|JSTL|
